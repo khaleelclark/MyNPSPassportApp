@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LocationApp</string>
+    <string name="national_park_buddy">National Park Buddy!</string>
+    <string name="version_1">Version 1</string>
+    <string name="acadia">Acadia</string>
+    <string name="arches">Arches</string>
+    <string name="biscayne">Biscayne</string>
+    <string name="badlands">Badlands</string>
+</resources>
