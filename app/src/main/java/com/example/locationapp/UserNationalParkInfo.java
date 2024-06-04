@@ -3,30 +3,27 @@ package com.example.locationapp;
 import java.time.LocalDate;
 
 public class UserNationalParkInfo {
-    private final String parkName;
-    private final boolean hasVisited = false;
-    private final boolean hasCompleted = false;
+    private boolean hasVisited = false;
+    private boolean hasCompleted = false;
     private final int numOfVisits = 0;
     private final LocalDate dateOfLastVisit = null;
     private final LocalDate dateOfLastCompletion = null;
-    private String parkNotes;
+    private String notes;
+    private final String parkName;
+    private final String parkState;
+    private final String parkDescription;
 
-
-
-
-    public UserNationalParkInfo(String parkName) {
+    public UserNationalParkInfo(String parkName, String parkState, String parkDescription, boolean hasVisited, boolean hasCompleted) {
         this.parkName = parkName;
+        this.parkState = parkState;
+        this.parkDescription = parkDescription;
+        this.hasCompleted = hasCompleted;
+        this.hasVisited = hasVisited;
     }
-
-    public String getParkName() {
-        return parkName;
-    }
-
     public String getParkNotes() {
-        return parkNotes;
+        return notes;
     }
-
     public void setParkNotes(String parkNotes) {
-        this.parkNotes = parkNotes;
+        this.notes = notes;
     }
 }
