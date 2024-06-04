@@ -2,7 +2,7 @@ package com.example.locationapp;
 
 import java.time.LocalDate;
 
-public class UserNationalParkInfo {
+public class nationalParkInstance {
     private boolean hasVisited = false;
     private boolean hasCompleted = false;
     private final int numOfVisits = 0;
@@ -13,7 +13,7 @@ public class UserNationalParkInfo {
     private final String parkState;
     private final String parkDescription;
 
-    public UserNationalParkInfo(String parkName, String parkState, String parkDescription, boolean hasVisited, boolean hasCompleted) {
+    public nationalParkInstance(String parkName, String parkState, String parkDescription, boolean hasVisited, boolean hasCompleted) {
         this.parkName = parkName;
         this.parkState = parkState;
         this.parkDescription = parkDescription;

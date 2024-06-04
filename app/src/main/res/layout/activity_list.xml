@@ -9,38 +9,63 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/biscayne"
+            android:text="@string/arches_np"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.28"
-            app:layout_constraintHorizontal_bias="0.501"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/badlands"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.057"
             app:layout_constraintHorizontal_bias="0.498"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/acadia"
+            android:text="@string/bryce_canyon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.133"
+            app:layout_constraintHorizontal_bias="0.498"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/canyonlands"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:id="@+id/textView2"
-            app:layout_constraintVertical_bias="0.054"/>
+            app:layout_constraintVertical_bias="0.209"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/arches"
+            android:text="@string/capitol_reef"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.126"
-            app:layout_constraintHorizontal_bias="0.498"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.292"
+    />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zion"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.372"
+    />
+    <RelativeLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <Button
+                android:text="@string/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/button"
+                android:background="#1D7321"
+                android:onClick="backToMainScreen"
+                tools:ignore="MissingConstraints"/>
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

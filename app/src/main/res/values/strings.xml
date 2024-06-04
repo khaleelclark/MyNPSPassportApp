@@ -7,4 +7,15 @@
     <string name="biscayne">Biscayne</string>
     <string name="badlands">Badlands</string>
     <string name="start">Start!</string>
+    <string name="welcome">Welcome!\n</string>
+    <string name="please_enter_your_username_and_password">Please enter your username and password!\n\n</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
+    <string name="arches_np">Arches</string>
+    <string name="bryce_canyon">Bryce Canyon</string>
+    <string name="canyonlands">Canyonlands</string>
+    <string name="capitol_reef">Capitol Reef</string>
+    <string name="zion">Zion</string>
+    <string name="back">Back</string>
 </resources>
