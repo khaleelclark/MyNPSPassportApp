@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button"
                 android:background="#1D7321"
-                android:onClick="changeScreen"
+                android:onClick="changeToSignUpScreen"
                 android:layout_gravity="center"
                 tools:ignore="MissingConstraints"/>
     </LinearLayout>

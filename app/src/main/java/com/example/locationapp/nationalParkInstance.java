@@ -2,7 +2,7 @@ package com.example.locationapp;
 
 import java.time.LocalDate;
 
-public class nationalParkInstance {
+public class nationalParkInstance  {
     private boolean hasVisited = false;
     private boolean hasCompleted = false;
     private final int numOfVisits = 0;
