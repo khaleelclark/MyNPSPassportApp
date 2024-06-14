@@ -17,4 +17,6 @@
     <string name="select_parks_visited">Please select from the following which National Parks you have visited.</string>
     <string name="visited">Visited?</string>
     <string name="completed">Completed?</string>
+    <string name="first_name">First Name</string>
+    <string name="login">Login</string>
 </resources>

@@ -18,8 +18,8 @@
     <Button android:id="@+id/my_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/back"
+            android:text="Next"
             android:layout_gravity="bottom|center"
             android:rotation="0"
-            android:onClick="changeScreen"/>
+            android:onClick="displayParksList"/>
 </LinearLayout>

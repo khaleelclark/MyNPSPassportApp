@@ -3,6 +3,7 @@ package com.example.locationapp;
 import java.util.ArrayList;
 
 public class parkUtility {
+
     ArrayList<nationalParkInstance> parkList = new ArrayList<>();
 
     public void initializeParks(){

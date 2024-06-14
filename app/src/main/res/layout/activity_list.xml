@@ -56,14 +56,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <Button
-                android:text="@string/back"
+                android:text="Return to Home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/button"
                 android:background="#1D7321"
-                android:onClick="backToMainScreen"
+                android:onClick="backToLoginScreen"
                 tools:ignore="MissingConstraints"/>
     </RelativeLayout>
 
