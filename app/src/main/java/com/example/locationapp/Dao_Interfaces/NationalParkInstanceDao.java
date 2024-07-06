@@ -1,32 +1,33 @@
 package com.example.locationapp.Dao_Interfaces;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import com.example.locationapp.nationalParkInstance;
+import com.example.locationapp.NationalParkInstance;
 
 import java.util.List;
 
 @Dao
 public interface NationalParkInstanceDao {
     @Query("SELECT * FROM national_park_instance")
-    List<nationalParkInstance> getAllInstances();
+    LiveData<List<NationalParkInstance>> getAllInstances();
 
     @Query("SELECT * FROM national_park_instance WHERE userId = :userId")
-    List<nationalParkInstance> findInstancesByUserId(int userId);
+    List<NationalParkInstance> findInstancesByUserId(int userId);
 
     @Query("SELECT * FROM national_park_instance WHERE parkId = :parkId")
-    List<nationalParkInstance> findInstancesByParkId(int parkId);
+    List<NationalParkInstance> findInstancesByParkId(int parkId);
 
     @Insert
-    void insertAll(nationalParkInstance... instances);
+    void insertAll(NationalParkInstance... instances);
 
     @Update
-    void updateInstance(nationalParkInstance instance);
+    void updateInstance(NationalParkInstance instance);
 
     @Delete
-    void deleteInstance(nationalParkInstance instance);
+    void deleteInstance(NationalParkInstance instance);
 }
 

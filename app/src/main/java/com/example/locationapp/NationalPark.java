@@ -17,4 +17,11 @@ public class NationalPark {
 
     @ColumnInfo(name = "park_description")
     public String parkDescription;
+
+    public NationalPark(String parkName, String parkState, String parkDescription) {
+        this.parkName = parkName;
+        this.parkState = parkState;
+        this.parkDescription = parkDescription;
+
+    }
 }

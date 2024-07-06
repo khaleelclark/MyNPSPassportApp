@@ -1,5 +1,6 @@
 package com.example.locationapp.Dao_Interfaces;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -11,7 +12,7 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM users")
-    List<User> getAll();
+    LiveData<List<User>> getAll();
 
     @Query("SELECT * FROM users WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
@@ -24,4 +25,6 @@ public interface UserDao {
 
     @Delete
     void delete(User user);
+
+    //how can i check if a user exists
 }

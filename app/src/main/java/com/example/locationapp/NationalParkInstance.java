@@ -1,7 +1,5 @@
 package com.example.locationapp;
 
-import java.time.LocalDate;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -21,7 +19,7 @@ import androidx.room.PrimaryKey;
         }
 )
 
-public class nationalParkInstance  {
+public class NationalParkInstance {
 
     private final String parkName;
     private final String parkState;
@@ -49,15 +47,15 @@ public class nationalParkInstance  {
     public int numOfVisits = 0;
 
     @ColumnInfo(name = "date_of_last_visit")
-    public LocalDate dateOfLastVisit = null;
+    public String dateOfLastVisit = null;
 
     @ColumnInfo(name = "date_of_last_completion")
-    public LocalDate dateOfLastCompletion = null;
+    public String dateOfLastCompletion = null;
 
     @ColumnInfo(name = "notes")
     public String notes;
 
-    public nationalParkInstance(String parkName, String parkState, String parkDescription, boolean hasVisited, boolean hasCompleted) {
+    public NationalParkInstance(String parkName, String parkState, String parkDescription, boolean hasVisited, boolean hasCompleted) {
         this.parkName = parkName;
         this.parkState = parkState;
         this.parkDescription = parkDescription;
