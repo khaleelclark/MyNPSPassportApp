@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+    <TextView android:id="@+id/text"
+              android:layout_width="182dp"
+              android:layout_height="63dp"
+              android:text="@string/select_parks_visited"/>
+    <CheckBox android:id="@+id/checkbox_has_visited"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/visited"/>
+    <CheckBox android:id="@+id/checkbox_has_completed"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/completed"/>
+    <Button android:id="@+id/my_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_gravity="bottom|center"
+            android:rotation="0"
+            android:onClick="displayParksList"/>
+</LinearLayout>
