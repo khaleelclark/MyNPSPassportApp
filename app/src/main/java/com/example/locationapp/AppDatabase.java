@@ -49,7 +49,8 @@ public abstract class AppDatabase extends RoomDatabase {
                 NationalPark canyonlands = new NationalPark("Canyonlands", "Utah", "Canyons");
                 NationalPark capitolReef = new NationalPark("Capitol Reef", "Utah", "Pie");
                 NationalPark zion = new NationalPark("Zion", "Utah", "Angel's Landing");
-                dao.insertAll(arches, bryceCanyon, canyonlands, capitolReef, zion);
+                NationalPark teton = new NationalPark("Grand Teton", "Wyoming", "Mountains");
+                dao.insertAll(arches, bryceCanyon, canyonlands, capitolReef, zion, teton);
             });
         }
     };
