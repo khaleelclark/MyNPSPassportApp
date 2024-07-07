@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel.getAllNationalParks().observe(this, nationalParks -> {
             for(NationalPark nationalPark : nationalParks) {
-                System.out.println(nationalPark.parkName);
+                System.out.println(nationalPark.getParkName());
             }
         });
     }
@@ -54,6 +54,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void registerUser (String username, String firstName){
-        //save inputs to database
+        if(Boolean.TRUE.equals(viewModel.doesUsernameExist(username).getValue())) {
+            //error here
+        }
+        else {
+            User user = new User(username, firstName);
+            viewModel.insertUser(user);
+
+            viewModel.getAllNationalParks().observe(this, nationalParks -> {
+                for(NationalPark nationalPark : nationalParks) {
+                    viewModel.insertNationalParkInstance(new NationalParkInstance(nationalPark.getUid(), user.getUid()));
+                }
+            });
+        }
     }
 }

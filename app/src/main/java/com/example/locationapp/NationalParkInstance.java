@@ -14,78 +14,111 @@ import androidx.room.PrimaryKey;
                         onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = User.class,
                         parentColumns = "uid",
-                        childColumns = "user_name",
+                        childColumns = "userId",
                         onDelete = ForeignKey.CASCADE)
         }
 )
 
 public class NationalParkInstance {
-
-    private final String parkName;
-    private final String parkState;
-    private final String parkDescription;
-
     @PrimaryKey(autoGenerate = true)
-    public int id;
-
-    @ColumnInfo(name = "user_name")
-    private String userName;
+    private int id;
 
     @ColumnInfo(name = "userId", index = true)
-    public int userId;
+    private int userId;
 
     @ColumnInfo(name = "parkId", index = true)
-    public int parkId;
+    private int parkId;
 
     @ColumnInfo(name = "has_visited")
-    public boolean hasVisited = false;
+    private boolean hasVisited = false;
 
     @ColumnInfo(name = "has_completed")
-    public boolean hasCompleted = false;
+    private boolean hasCompleted = false;
 
     @ColumnInfo(name = "num_of_visits")
-    public int numOfVisits = 0;
+    private int numOfVisits = 0;
 
     @ColumnInfo(name = "date_of_last_visit")
-    public String dateOfLastVisit = null;
+    private String dateOfLastVisit = null;
 
     @ColumnInfo(name = "date_of_last_completion")
-    public String dateOfLastCompletion = null;
+    private String dateOfLastCompletion = null;
 
     @ColumnInfo(name = "notes")
-    public String notes;
+    private String parkNotes;
 
-    public NationalParkInstance(String parkName, String parkState, String parkDescription, boolean hasVisited, boolean hasCompleted) {
-        this.parkName = parkName;
-        this.parkState = parkState;
-        this.parkDescription = parkDescription;
-        this.hasCompleted = hasCompleted;
-        this.hasVisited = hasVisited;
+    public NationalParkInstance(int parkId, int userId) {
+    this.parkId = parkId;
+    this.userId = userId;
     }
     public String getParkNotes() {
-        return notes;
+        return parkNotes;
     }
     public void setParkNotes(String parkNotes) {
-        this.notes = notes;
+        this.parkNotes = parkNotes;
     }
 
-    public String getParkName() {
-        return parkName;
+    public int getId() {
+        return id;
     }
 
-    public String getParkState() {
-        return parkState;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getParkDescription() {
-        return parkDescription;
+    public int getUserId() {
+        return userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public int getParkId() {
+        return parkId;
+    }
+
+    public void setParkId(int parkId) {
+        this.parkId = parkId;
+    }
+
+    public boolean isHasVisited() {
+        return hasVisited;
+    }
+
+    public void setHasVisited(boolean hasVisited) {
+        this.hasVisited = hasVisited;
+    }
+
+    public boolean isHasCompleted() {
+        return hasCompleted;
+    }
+
+    public void setHasCompleted(boolean hasCompleted) {
+        this.hasCompleted = hasCompleted;
+    }
+
+    public int getNumOfVisits() {
+        return numOfVisits;
+    }
+
+    public void setNumOfVisits(int numOfVisits) {
+        this.numOfVisits = numOfVisits;
+    }
+
+    public String getDateOfLastVisit() {
+        return dateOfLastVisit;
+    }
+
+    public void setDateOfLastVisit(String dateOfLastVisit) {
+        this.dateOfLastVisit = dateOfLastVisit;
+    }
+
+    public String getDateOfLastCompletion() {
+        return dateOfLastCompletion;
+    }
+
+    public void setDateOfLastCompletion(String dateOfLastCompletion) {
+        this.dateOfLastCompletion = dateOfLastCompletion;
     }
 }

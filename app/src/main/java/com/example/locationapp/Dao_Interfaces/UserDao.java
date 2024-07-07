@@ -20,11 +20,14 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE user_name LIKE :userName LIMIT 1")
     User findByName(String userName);
 
+    @Query("SELECT COUNT (*) FROM users WHERE user_name = :userName")
+    int countByUsername(String userName);
+
     @Insert
     void insertAll(User... users);
 
     @Delete
     void delete(User user);
 
-    //how can i check if a user exists
+    //how can i check if a user exists - take username, return boolean
 }

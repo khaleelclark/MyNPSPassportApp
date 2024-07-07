@@ -4,6 +4,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import com.example.locationapp.Dao_Interfaces.NationalParkDao;
 import com.example.locationapp.Dao_Interfaces.NationalParkInstanceDao;
 import com.example.locationapp.Dao_Interfaces.UserDao;
@@ -20,6 +21,7 @@ public class ViewModel extends AndroidViewModel {
     private LiveData<List<NationalPark>> allNationalParks;
     private LiveData<List<NationalParkInstance>> allNationalParkInstances;
     private ExecutorService executorService;
+    private final MutableLiveData<Boolean> usernameExists = new MutableLiveData<>();
 
     public ViewModel(@NonNull Application application) {
         super(application);
@@ -29,8 +31,8 @@ public class ViewModel extends AndroidViewModel {
         allNationalParks = db.nationalParkDao().getAllParks();
         allNationalParkInstances = db.nationalParkInstanceDao().getAllInstances();
         executorService = Executors.newFixedThreadPool(2);
-    }
 
+    }
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
     }
@@ -40,6 +42,13 @@ public class ViewModel extends AndroidViewModel {
     public LiveData<List<NationalParkInstance>> getAllNationalParkInstances(){
         return allNationalParkInstances;
     }
+    public LiveData<Boolean> doesUsernameExist(String username){
+   executorService.execute(()-> {
+       boolean exists = userDao.countByUsername(username) > 0;
+       usernameExists.postValue(exists);
+   });
+   return usernameExists;
+   }
 
     public void insertUser(User user) {
         executorService.execute(() -> userDao.insertAll(user));
@@ -50,4 +59,5 @@ public class ViewModel extends AndroidViewModel {
     public void insertNationalParkInstance(NationalParkInstance nationalParkInstance) {
         executorService.execute(() -> nationalParkInstanceDao.insertAll(nationalParkInstance));
     }
+
 }
