@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText firstNameEditText;
     private Button registerButton;
     private Button submitButton;
+    private Button createAccountButton;
     public User currentUser;
     private AppDatabase db;
     private CustomNationalParkInstanceAdapter customNationalParkInstanceAdapter;
@@ -31,21 +32,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_login);
         db = AppDatabase.getDatabase(getApplicationContext());
 
-        usernameEditText = findViewById(R.id.usernameEditText);
-        firstNameEditText = findViewById(R.id.firstNameEditText);
-        registerButton = findViewById(R.id.registerButton);
+        createAccountButton = findViewById(R.id.create_account_button);
+        createAccountButton.setOnClickListener((view) -> {
+            setContentView(R.layout.activity_sign_up);
+            usernameEditText = findViewById(R.id.usernameEditText);
+            firstNameEditText = findViewById(R.id.firstNameEditText);
+            registerButton = findViewById(R.id.registerButton);
 
 
-        registerButton.setOnClickListener(v -> {
-            String username = usernameEditText.getText().toString();
-            String firstName = firstNameEditText.getText().toString();
-            System.out.println("GOTHERE");
-            registerUser(username, firstName);
+            registerButton.setOnClickListener(v -> {
+                String username = usernameEditText.getText().toString();
+                String firstName = firstNameEditText.getText().toString();
+                System.out.println("GOTHERE");
+                registerUser(username, firstName);
+            });
+
         });
     }
+
     public void displayParksList(View view) {
         setContentView(R.layout.activity_list);
     }
@@ -75,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
    //     setContentView(R.layout.activity_set_park_data);
   //  }
     public void changeToSignUpScreen(View view) {
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
     }
 
     private void registerUser (String username, String firstName) {
