@@ -21,4 +21,6 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="please_enter_your_username">Please enter your username</string>
+    <string name="ive_visited">I\'ve visited.</string>
+    <string name="ive_completed">I\'ve completed.</string>
 </resources>

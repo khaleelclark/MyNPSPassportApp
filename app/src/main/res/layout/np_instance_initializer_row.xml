@@ -9,18 +9,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""/>
-    <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <RadioButton android:id="@+id/radio_pirates"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="I've visited."/>
-        <RadioButton android:id="@+id/radio_ninjas"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="I've completed."/>
-    </RadioGroup>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <CheckBox android:id="@+id/checkbox_has_completed"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/completed"
+              android:padding="30dp"/>
+    <CheckBox android:id="@+id/checkbox_has_visited"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/visited"
+              android:padding="30dp"/>
+    </LinearLayout>
 
 </FrameLayout>
