@@ -9,7 +9,7 @@ import java.util.List;
 @Dao
 public interface NationalParkDao {
     @Query("SELECT * FROM national_park")
-    LiveData<List<NationalPark>> getAllParks();
+    List<NationalPark> getAllParks();
 
     @Query("SELECT * FROM national_park WHERE uid = :parkId")
     NationalPark getParkById(int parkId);

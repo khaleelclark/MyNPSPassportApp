@@ -21,6 +21,7 @@ public interface NationalParkInstanceDao {
     @Query("SELECT * FROM national_park_instance WHERE parkId = :parkId")
     List<NationalParkInstance> findInstancesByParkId(int parkId);
 
+
     @Insert
     void insertAll(NationalParkInstance... instances);
 
