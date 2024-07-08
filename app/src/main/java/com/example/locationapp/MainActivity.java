@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button registerButton;
     private Button submitButton;
     private Button createAccountButton;
+    //private Button mainButton;
     public User currentUser;
     private AppDatabase db;
     private CustomNationalParkInstanceAdapter customNationalParkInstanceAdapter;
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             registerButton.setOnClickListener(v -> {
                 String username = usernameEditText.getText().toString();
                 String firstName = firstNameEditText.getText().toString();
-                System.out.println("GOTHERE");
                 registerUser(username, firstName);
             });
 
@@ -57,10 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
     }
 
-
-
     public void submitInitialInstances() {
-
         new Thread(() -> {
             List<NationalParkInstance> nationalParkInstances = db.nationalParkInstanceDao().findInstancesByUserId(currentUser.getUid());
             for(NationalParkInstanceInitializer npii : customNationalParkInstanceAdapter.getLocalDataSet()) {
@@ -73,9 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             List<NationalParkInstance> nationalParkInstances2 = db.nationalParkInstanceDao().findInstancesByUserId(currentUser.getUid());
-            for(NationalParkInstance npi: nationalParkInstances2) {
-                System.out.println(npi.getParkId()+", "+npi.getUserId()+", "+npi.isHasCompleted()+", "+npi.isHasVisited());
-            }
+            List<NationalPark> nationalParks = db.nationalParkDao().getAllParks();
+
+            NationalParkListAdapter nationalParkListAdapter = new NationalParkListAdapter(nationalParkInstances2, nationalParks);
+
+            runOnUiThread( () -> {
+                setContentView(R.layout.main_activity_list);
+                RecyclerView recyclerView = findViewById(R.id.np_main_view);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                recyclerView.setAdapter(nationalParkListAdapter);
+            }  );
         }).start();
     }
    // public void collectUserParkInfo(View view) {
@@ -108,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread( () -> {
                     setContentView(R.layout.activity_list);
                     RecyclerView recyclerView = findViewById(R.id.np_initializer_view);
-                    System.out.println(recyclerView);
                     recyclerView.setLayoutManager(new LinearLayoutManager(this));
                     recyclerView.setAdapter(customNationalParkInstanceAdapter);
                     submitButton = findViewById(R.id.submitButton);
