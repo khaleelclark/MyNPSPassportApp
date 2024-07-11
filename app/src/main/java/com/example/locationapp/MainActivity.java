@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button registerButton;
     private Button submitButton;
     private Button createAccountButton;
+    private Button loginButton;
     //private Button mainButton;
     public User currentUser;
     private AppDatabase db;
@@ -35,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = AppDatabase.getDatabase(getApplicationContext());
+
+        loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener((l) -> {
+            usernameEditText = findViewById(R.id.usernameEditText);
+            String loginUsername = usernameEditText.getText().toString();
+            loginUser(loginUsername);
+        });
 
         createAccountButton = findViewById(R.id.create_account_button);
         createAccountButton.setOnClickListener((view) -> {
@@ -53,22 +61,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void displayParksList(View view) {
-        setContentView(R.layout.activity_list);
-    }
+//    public void displayParksList(View view) {
+//        setContentView(R.layout.activity_list);
+//    }
 
     public void submitInitialInstances() {
         new Thread(() -> {
             List<NationalParkInstance> nationalParkInstances = db.nationalParkInstanceDao().findInstancesByUserId(currentUser.getUid());
-            for(NationalParkInstanceInitializer npii : customNationalParkInstanceAdapter.getLocalDataSet()) {
-                for(NationalParkInstance npi : nationalParkInstances) {
-                    if(npii.getId() == npi.getParkId()) {
+            for (NationalParkInstanceInitializer npii : customNationalParkInstanceAdapter.getLocalDataSet()) {
+                for (NationalParkInstance npi : nationalParkInstances) {
+                    if (npii.getId() == npi.getParkId()) {
                         npi.setHasCompleted(npii.isHasCompleted());
                         npi.setHasVisited(npii.isHasVisited());
                         db.nationalParkInstanceDao().updateInstance(npi);
                     }
                 }
             }
+            switchToMainScreen();
+        }).start();
+    }
+
+            public void switchToMainScreen() {
+                new Thread(() -> {
+
             List<NationalParkInstance> nationalParkInstances2 = db.nationalParkInstanceDao().findInstancesByUserId(currentUser.getUid());
             List<NationalPark> nationalParks = db.nationalParkDao().getAllParks();
 
@@ -87,6 +102,19 @@ public class MainActivity extends AppCompatActivity {
   //  }
     public void changeToSignUpScreen(View view) {
         setContentView(R.layout.activity_sign_up);
+    }
+
+    private void loginUser(String loginUsername) {
+        new Thread(() -> {
+            System.out.println("STARTING THREAD");
+            boolean userExists = db.userDao().countByUsername(loginUsername) > 0;
+            if (userExists) {
+                currentUser = db.userDao().findByName(loginUsername);
+                System.out.println("LOGGED IN");
+               switchToMainScreen();
+            }
+        }).start();
+
     }
 
     private void registerUser (String username, String firstName) {
