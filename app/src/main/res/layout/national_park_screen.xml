@@ -8,16 +8,29 @@
         tools:context=".MainActivity">
     <TextView
             android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:text=""
+            android:gravity="center_horizontal"
             android:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.057"
-            app:layout_constraintHorizontal_bias="0.498"/>
+            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.05"/>
+    <TextView
+            android:id="@+id/parkDescription"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text=""
+            android:gravity="center_horizontal"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.150"/>
     <RelativeLayout
             android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
@@ -26,10 +39,9 @@
                     android:text="Back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:id="@+id/backButton"
-                    android:background="#1D7321"
                     tools:ignore="MissingConstraints"/>
         </RelativeLayout>
 

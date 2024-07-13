@@ -95,12 +95,6 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-//    public void displayParkInfo() {
-//        //textview on click
-//        NPView = findViewById(R.id.textView);
-//        NPView.setOnClickListener();
-//    }
-
     private void loginUser(String loginUsername) {
         new Thread(() -> {
             System.out.println("STARTING THREAD");
@@ -118,10 +112,11 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.test);
         textView.setText(nationalPark.getParkName());
 
+        TextView parkTextView = findViewById(R.id.parkDescription);
+        parkTextView.setText(nationalPark.getParkDescription());
+
 
         backButton = findViewById(R.id.backButton);
-        backButton.setText(nationalPark.getParkDescription());
-
         backButton.setOnClickListener((l) -> {
             switchToMainScreen();
         });
