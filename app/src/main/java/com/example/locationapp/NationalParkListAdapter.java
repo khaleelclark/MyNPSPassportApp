@@ -93,12 +93,14 @@ public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.lo
                     if(nationalPark.getParkName().equals("Arches")) {
                         viewHolder.getTextView().setBackground(mainActivity.getDrawable(R.drawable.arches_np));
                     }
-//                   if(nationalPark.getParkName().equals("Zion")) {
-//                        viewHolder.getTextView().setBackground(mainActivity.getDrawable(R.drawable.zion_np));
-//                    }
-
-                    if(nationalPark.getParkName().equals("Grand Teton")) {
+                   if(nationalPark.getParkName().equals("Zion")) {
+                        viewHolder.getTextView().setBackground(mainActivity.getDrawable(R.drawable.zion_np));
+                    }
+                   if(nationalPark.getParkName().equals("Grand Teton")) {
                         viewHolder.getTextView().setBackground(mainActivity.getDrawable(R.drawable.grand_teton_np));
+                    }
+                    if(nationalPark.getParkName().equals("Capitol Reef")) {
+                        viewHolder.getTextView().setBackground(mainActivity.getDrawable(R.drawable.capitol_reef_np));
                     }
 
                 }
