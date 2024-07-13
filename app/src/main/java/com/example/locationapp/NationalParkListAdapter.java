@@ -15,7 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.locationapp.CustomNationalParkInstanceAdapter.ViewHolder> {
-     private List<NationalParkInstance> nationalParkInstances;
+    private final MainActivity mainActivity;
+    private List<NationalParkInstance> nationalParkInstances;
      private List<NationalPark> nationalParks;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -36,9 +37,10 @@ public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.lo
         }
 
         //initialize dataset
-        public NationalParkListAdapter(List<NationalParkInstance> nationalParkInstances, List<NationalPark> nationalParks) {
+        public NationalParkListAdapter(List<NationalParkInstance> nationalParkInstances, List<NationalPark> nationalParks, MainActivity mainActivity) {
             this.nationalParkInstances = nationalParkInstances;
             this.nationalParks = nationalParks;
+            this.mainActivity = mainActivity;
         }
 
         @Override
@@ -50,13 +52,24 @@ public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.lo
 
         @Override
         public void onBindViewHolder(@NonNull @NotNull com.example.locationapp.CustomNationalParkInstanceAdapter.ViewHolder viewHolder, final int position) {
+            NationalParkInstance nationalParkInstance = nationalParkInstances.get(position);
+
             for(NationalPark nationalPark : nationalParks) {
-                if(nationalPark.getUid() == nationalParkInstances.get(position).getParkId()) {
+                if(nationalPark.getUid() == nationalParkInstance.getParkId()) {
                     viewHolder.getTextView().setText(nationalPark.getParkName());
-                    if(nationalParkInstances.get(position).isHasCompleted()) {
+
+                    TextView parkTextView = viewHolder.getTextView();
+                    parkTextView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mainActivity.setNationalParkScreen(nationalPark, nationalParkInstance);
+                        }
+                    });
+
+                    if(nationalParkInstance.isHasCompleted()) {
                         viewHolder.getTextView().setTextColor(Color.GREEN);
                     }
-                    else if(nationalParkInstances.get(position).isHasVisited()) {
+                    else if(nationalParkInstance.isHasVisited()) {
                         viewHolder.getTextView().setTextColor(Color.YELLOW);
                     }
                     else {
@@ -70,6 +83,7 @@ public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.lo
         public int getItemCount() {
             return nationalParkInstances.size();
         }
+
 
 
 

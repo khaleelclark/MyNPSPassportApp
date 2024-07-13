@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -14,20 +15,4 @@
             android:clipToPadding="false"
             android:scrollbars="vertical"
             android:id="@+id/np_main_view" />
-    <RelativeLayout
-            android:id="@+id/LinearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <Button
-                android:text="Submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:id="@+id/submitButton2"
-                android:background="#1D7321"
-                tools:ignore="MissingConstraints"/>
-    </RelativeLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

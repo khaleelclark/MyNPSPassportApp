@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Button submitButton;
     private Button createAccountButton;
     private Button loginButton;
-    //private Button mainButton;
+    private Button backButton;
+    private TextView NPView;
     public User currentUser;
     private AppDatabase db;
     private CustomNationalParkInstanceAdapter customNationalParkInstanceAdapter;
@@ -61,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    public void displayParksList(View view) {
-//        setContentView(R.layout.activity_list);
-//    }
-
     public void submitInitialInstances() {
         new Thread(() -> {
             List<NationalParkInstance> nationalParkInstances = db.nationalParkInstanceDao().findInstancesByUserId(currentUser.getUid());
@@ -81,13 +78,13 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-            public void switchToMainScreen() {
+    public void switchToMainScreen() {
                 new Thread(() -> {
 
             List<NationalParkInstance> nationalParkInstances2 = db.nationalParkInstanceDao().findInstancesByUserId(currentUser.getUid());
             List<NationalPark> nationalParks = db.nationalParkDao().getAllParks();
 
-            NationalParkListAdapter nationalParkListAdapter = new NationalParkListAdapter(nationalParkInstances2, nationalParks);
+            NationalParkListAdapter nationalParkListAdapter = new NationalParkListAdapter(nationalParkInstances2, nationalParks, this);
 
             runOnUiThread( () -> {
                 setContentView(R.layout.main_activity_list);
@@ -97,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
             }  );
         }).start();
     }
-   // public void collectUserParkInfo(View view) {
-   //     setContentView(R.layout.activity_set_park_data);
-  //  }
-    public void changeToSignUpScreen(View view) {
-        setContentView(R.layout.activity_sign_up);
-    }
+
+//    public void displayParkInfo() {
+//        //textview on click
+//        NPView = findViewById(R.id.textView);
+//        NPView.setOnClickListener();
+//    }
 
     private void loginUser(String loginUsername) {
         new Thread(() -> {
@@ -114,6 +111,20 @@ public class MainActivity extends AppCompatActivity {
                switchToMainScreen();
             }
         }).start();
+    }
+
+    public void setNationalParkScreen(NationalPark nationalPark, NationalParkInstance nationalParkInstance) {
+        setContentView(R.layout.national_park_screen);
+        TextView textView = findViewById(R.id.test);
+        textView.setText(nationalPark.getParkName());
+
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setText(nationalPark.getParkDescription());
+
+        backButton.setOnClickListener((l) -> {
+            switchToMainScreen();
+        });
 
     }
 
