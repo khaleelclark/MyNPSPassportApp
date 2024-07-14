@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             loginUser(loginUsername);
         });
 
+
         createAccountButton = findViewById(R.id.create_account_button);
         createAccountButton.setOnClickListener((view) -> {
             setContentView(R.layout.activity_sign_up);
