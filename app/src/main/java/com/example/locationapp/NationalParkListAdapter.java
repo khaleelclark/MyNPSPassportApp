@@ -6,10 +6,7 @@ import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,23 +21,19 @@ public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.lo
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             private final TextView textView;
-            private final ImageView picture;
             private final CheckBox hasCompletedButton;
             private final CheckBox hasVistedButton;
+
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 //define click listener for view holder
                 textView = itemView.findViewById(R.id.textView);
-                picture = itemView.findViewById(R.id.picture);
                 hasCompletedButton = itemView.findViewById(R.id.checkbox_has_completed);
                 hasVistedButton = (CheckBox) itemView.findViewById(R.id.checkbox_has_visited);
             }
             public TextView getTextView() {
                 return textView;
-            }
-            public ImageView getPicture() {
-                return picture;
             }
         }
 
@@ -102,17 +95,11 @@ public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.lo
                     if(nationalPark.getParkName().equals("Capitol Reef")) {
                         viewHolder.getTextView().setBackground(mainActivity.getDrawable(R.drawable.capitol_reef_np));
                     }
-
                 }
             }
         }
-
         @Override
         public int getItemCount() {
             return nationalParkInstances.size();
         }
-
-
-
-
 }

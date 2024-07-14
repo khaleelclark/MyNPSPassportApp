@@ -25,8 +25,12 @@ public class MainActivity extends AppCompatActivity {
     private Button submitButton;
     private Button createAccountButton;
     private Button loginButton;
+    private Button logoutButton;
     private Button backButton;
-    private TextView NPView;
+    private Button increaseButton;
+    private Button decreaseButton;
+    private TextView numParksVisited;
+    private int visitCount;
     public User currentUser;
     private AppDatabase db;
     private CustomNationalParkInstanceAdapter customNationalParkInstanceAdapter;
@@ -105,6 +109,42 @@ public class MainActivity extends AppCompatActivity {
                switchToMainScreen();
             }
         }).start();
+    }
+
+//    public void logoutUser(View view) {
+//        Button logoutButton = findViewById(R.id.logoutButton);
+//        logoutButton.setOnClickListener((v) -> {
+//            new Thread(() -> {
+//                System.out.println("LOGGED OUT");
+//                runOnUiThread(() -> {
+//                    setContentView(R.layout.activity_login);
+//                    currentUser = null;
+//                });
+//            }).start();
+//        });
+//    }
+
+    @SuppressLint("SetTextI18n")
+    public void parksVisitedIncrementer(View view) {
+        Button increaseButton = findViewById(R.id.increaseButton);
+        TextView numParksVisited = findViewById(R.id.visitCounter);
+
+        increaseButton.setOnClickListener((v) -> {
+            visitCount++;
+            numParksVisited.setText("Number of Visits: " + visitCount);
+        });
+    }
+
+    public void parksVisitedDecrementer(View view){
+        Button decreaseButton = findViewById(R.id.decreaseButton);
+        TextView numParksVisited = findViewById(R.id.visitCounter);
+
+        decreaseButton.setOnClickListener((v) -> {
+            if (visitCount > 0) {
+                visitCount--;
+            }
+            numParksVisited.setText("Number of Visits: " + visitCount);
+        });
     }
 
     public void setNationalParkScreen(NationalPark nationalPark, NationalParkInstance nationalParkInstance) {

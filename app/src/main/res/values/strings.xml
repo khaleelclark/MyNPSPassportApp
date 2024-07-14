@@ -24,4 +24,7 @@
     <string name="ive_visited">I\'ve visited.</string>
     <string name="ive_completed">I\'ve completed.</string>
     <string name="create_an_account">Create an account</string>
+    <string name="decrease">Decrease</string>
+    <string name="increase">Increase</string>
+    <string name="logout">Logout</string>
 </resources>
