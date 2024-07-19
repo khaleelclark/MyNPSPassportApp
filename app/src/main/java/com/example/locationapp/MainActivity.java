@@ -112,18 +112,27 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-//    public void logoutUser(View view) {
-//        Button logoutButton = findViewById(R.id.logoutButton);
-//        logoutButton.setOnClickListener((v) -> {
-//            new Thread(() -> {
-//                System.out.println("LOGGED OUT");
-//                runOnUiThread(() -> {
-//                    setContentView(R.layout.activity_login);
-//                    currentUser = null;
-//                });
-//            }).start();
-//        });
-//    }
+    public void logoutUser(View view) {
+        Button logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener((v) -> {
+            new Thread(() -> {
+                System.out.println("LOGGED OUT");
+                runOnUiThread(() -> {
+                    setContentView(R.layout.activity_login);
+                    currentUser = null;
+                    returnToLoginScreen();
+                });
+            }).start();
+        });
+    }
+
+    private void returnToLoginScreen() {
+        Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener((v) -> {
+            String username = ((EditText) findViewById(R.id.usernameEditText)).getText().toString();
+            loginUser(username);
+        });
+    }
 
     @SuppressLint("SetTextI18n")
     public void parksVisitedIncrementer(View view) {
@@ -155,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView parkTextView = findViewById(R.id.parkDescription);
         parkTextView.setText(nationalPark.getParkDescription());
+
+        //get notes?
 
 
         backButton = findViewById(R.id.backButton);
