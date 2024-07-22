@@ -2,11 +2,15 @@ package com.example.locationapp;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Button increaseButton;
     private Button decreaseButton;
     private TextView numParksVisited;
+    private TextView parkNotes;
     private int visitCount;
     public User currentUser;
     private AppDatabase db;
@@ -41,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = AppDatabase.getDatabase(getApplicationContext());
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle("National Park Passport Buddy");
+        actionBar.setSubtitle("Designed by Zindel");
+        actionBar.setDisplayUseLogoEnabled(true);
 
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener((l) -> {
@@ -66,6 +77,23 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+//    @Override
+//    public boolean onOptionsItemSelected( @NonNull MenuItem item ){
+//        switch (item.getItemId()){
+//            case R.id.action_settings:
+//                break;
+//            case R.id.logout2Button:
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void submitInitialInstances() {
         new Thread(() -> {
@@ -112,19 +140,19 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    public void logoutUser(View view) {
-        Button logoutButton = findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener((v) -> {
-            new Thread(() -> {
-                System.out.println("LOGGED OUT");
-                runOnUiThread(() -> {
-                    setContentView(R.layout.activity_login);
-                    currentUser = null;
-                    returnToLoginScreen();
-                });
-            }).start();
-        });
-    }
+//    public void logoutUser(View view) {
+//        Button logoutButton = findViewById(R.id.test2Button);
+//        logoutButton.setOnClickListener((v) -> {
+//            new Thread(() -> {
+//                System.out.println("LOGGED OUT");
+//                runOnUiThread(() -> {
+//                    setContentView(R.layout.activity_login);
+//                    currentUser = null;
+//                    returnToLoginScreen();
+//                });
+//            }).start();
+//        });
+//    }
 
     private void returnToLoginScreen() {
         Button loginButton = findViewById(R.id.loginButton);
@@ -145,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     public void parksVisitedDecrementer(View view){
         Button decreaseButton = findViewById(R.id.decreaseButton);
         TextView numParksVisited = findViewById(R.id.visitCounter);
@@ -165,15 +194,19 @@ public class MainActivity extends AppCompatActivity {
         TextView parkTextView = findViewById(R.id.parkDescription);
         parkTextView.setText(nationalPark.getParkDescription());
 
-        //get notes?
+//get and set notes
+        parkNotes = findViewById(R.id.parkNotes);
+        //parkNotes.setText(db.nationalParkInstanceDao().getNotes(this.currentUser.getUid(), nationalParkInstance.getParkId()));
 
 
         backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener((l) -> {
-            switchToMainScreen();
-        });
+        backButton.setOnClickListener((l) -> switchToMainScreen());
 
     }
+
+//    public void setNationalParkInstanceNotes(){
+//
+//    }
 
     private void registerUser (String username, String firstName) {
         new Thread(() -> {
@@ -209,4 +242,25 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+    public void logoutUser(MenuItem item) {
+                new Thread(() -> {
+                    System.out.println("LOGGED OUT");
+                    runOnUiThread(() -> {
+                        setContentView(R.layout.activity_login);
+                        currentUser = null;
+                        returnToLoginScreen();
+                        initializeLoginScreen();
+                    });
+                }).start();
+    }
+    private void initializeLoginScreen () {
+        loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener((l) -> {
+            usernameEditText = findViewById(R.id.usernameEditText);
+            String loginUsername = usernameEditText.getText().toString();
+            loginUser(loginUsername);
+        });
+    }
 }
+

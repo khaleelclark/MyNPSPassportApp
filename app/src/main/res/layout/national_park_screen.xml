@@ -75,22 +75,17 @@
                     android:layout_height="wrap_content"
                     android:onClick="parksVisitedDecrementer"
                     android:text="@string/decrease"/>
-        </LinearLayout>
 
+        </LinearLayout>
         <Button
                 android:id="@+id/backButton"
                 android:text="@string/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"/>
-        <Button
-                android:id="@+id/logoutButton"
-                android:text="@string/logout"
-                android:layout_marginBottom="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="logoutUser"
-                android:layout_gravity="bottom|center"/>
+                android:layout_marginTop="200dp"
+                android:padding="20dp"
+                android:layout_gravity="center"/>
+
     </LinearLayout>
 
 </ScrollView>

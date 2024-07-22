@@ -28,6 +28,4 @@ public interface UserDao {
 
     @Delete
     void delete(User user);
-
-    //how can i check if a user exists - take username, return boolean
 }
