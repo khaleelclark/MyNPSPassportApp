@@ -7,10 +7,4 @@
             android:title="Logout"
             android:onClick="logoutUser"
             android:orderInCategory="100"/>
-
-<!--    <item android:title="Log Out"-->
-<!--          android:id="@+id/logout2Button"-->
-<!--          android:orderInCategory="100"-->
-<!--          android:onClick="logoutUser"-->
-<!--          app:showAsAction="never"/>-->
 </menu>

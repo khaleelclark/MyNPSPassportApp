@@ -27,4 +27,7 @@
     <string name="decrease">Decrease</string>
     <string name="increase">Increase</string>
     <string name="logout">Logout</string>
+    <string name="enter_notes">Enter any notes about the park here.</string>
+    <string name="save_notes">Save Notes</string>
+    <string name="number_of_visits">Number of Visits:</string>
 </resources>

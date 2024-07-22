@@ -34,14 +34,14 @@
         <EditText
                 android:id="@+id/parkNotes"
                 android:text=""
-                android:hint="Enter any notes about the park here."
+                android:hint="@string/enter_notes"
                 android:layout_width="match_parent"
                 android:layout_height="131dp"
                 android:gravity="center"
                 android:layout_marginBottom="16dp"/>
         <Button
                 android:id="@+id/saveButton"
-                android:text="Save Notes"
+                android:text="@string/save_notes"
                 android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:id="@+id/visitCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Number of Visits: 0"
+                android:text="@string/number_of_visits"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:layout_marginBottom="8dp"/>

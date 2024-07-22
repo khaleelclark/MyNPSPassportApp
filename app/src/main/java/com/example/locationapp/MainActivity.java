@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Button decreaseButton;
     private TextView numParksVisited;
     private TextView parkNotes;
-    private int visitCount;
+    private int visitCount = 0;
     public User currentUser;
     private AppDatabase db;
     private CustomNationalParkInstanceAdapter customNationalParkInstanceAdapter;
@@ -84,17 +84,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected( @NonNull MenuItem item ){
-//        switch (item.getItemId()){
-//            case R.id.action_settings:
-//                break;
-//            case R.id.logout2Button:
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     public void submitInitialInstances() {
         new Thread(() -> {
             List<NationalParkInstance> nationalParkInstances = db.nationalParkInstanceDao().findInstancesByUserId(currentUser.getUid());
@@ -140,20 +129,6 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-//    public void logoutUser(View view) {
-//        Button logoutButton = findViewById(R.id.test2Button);
-//        logoutButton.setOnClickListener((v) -> {
-//            new Thread(() -> {
-//                System.out.println("LOGGED OUT");
-//                runOnUiThread(() -> {
-//                    setContentView(R.layout.activity_login);
-//                    currentUser = null;
-//                    returnToLoginScreen();
-//                });
-//            }).start();
-//        });
-//    }
-
     private void returnToLoginScreen() {
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener((v) -> {
@@ -166,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
     public void parksVisitedIncrementer(View view) {
         Button increaseButton = findViewById(R.id.increaseButton);
         TextView numParksVisited = findViewById(R.id.visitCounter);
+        numParksVisited.setText("Number of Visits: " + visitCount);
 
         increaseButton.setOnClickListener((v) -> {
             visitCount++;
@@ -177,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
     public void parksVisitedDecrementer(View view){
         Button decreaseButton = findViewById(R.id.decreaseButton);
         TextView numParksVisited = findViewById(R.id.visitCounter);
+        numParksVisited.setText("Number of Visits: " + visitCount);
 
         decreaseButton.setOnClickListener((v) -> {
             if (visitCount > 0) {
