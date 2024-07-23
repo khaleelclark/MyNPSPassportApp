@@ -207,11 +207,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-//    public void setNationalParkInstanceNotes(){
-//
-//    }
-
     private void registerUser (String username, String firstName) {
         new Thread(() -> {
             System.out.println("STARTING THREAD");
