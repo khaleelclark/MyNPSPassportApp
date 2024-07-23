@@ -21,8 +21,8 @@ public interface NationalParkInstanceDao {
     @Query("SELECT * FROM national_park_instance WHERE parkId = :parkId")
     List<NationalParkInstance> findInstancesByParkId(int parkId);
 
-    @Query("UPDATE national_park_instance SET notes = :notes WHERE userId = :userId AND parkId = :parkId")
-    void updateParkNotes(int userId, int parkId, String notes);
+    @Query("UPDATE national_park_instance SET notes = :notes, num_of_visits = :numOfVisits WHERE userId = :userId AND parkId = :parkId")
+    void updateParkNotes(int userId, int parkId, String notes, int numOfVisits);
 
     @Query("SELECT notes FROM national_park_instance WHERE userId = :userId AND parkId = :parkId")
     String getNotes(int userId, int parkId);

@@ -2,13 +2,11 @@ package com.example.locationapp;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 
@@ -61,12 +59,7 @@ public class NationalParkListAdapter extends RecyclerView.Adapter<com.example.lo
                     viewHolder.getTextView().setText(nationalPark.getParkName());
 
                     TextView parkTextView = viewHolder.getTextView();
-                    parkTextView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mainActivity.setNationalParkScreen(nationalPark, nationalParkInstance);
-                        }
-                    });
+                    parkTextView.setOnClickListener(v -> mainActivity.setNationalParkScreen(nationalPark, nationalParkInstance));
 
                     if(nationalParkInstance.isHasCompleted()) {
                         viewHolder.getTextView().setTextColor(Color.GREEN);

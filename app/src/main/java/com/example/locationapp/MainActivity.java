@@ -1,26 +1,20 @@
 package com.example.locationapp;
 
 import android.annotation.SuppressLint;
-import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.locationapp.Dao_Interfaces.UserDao;
+import com.example.locationapp.Dao_Interfaces.NationalParkInstanceDao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private EditText usernameEditText;
@@ -29,13 +23,12 @@ public class MainActivity extends AppCompatActivity {
     private Button submitButton;
     private Button createAccountButton;
     private Button loginButton;
-    private Button logoutButton;
+    private Button saveButton;
     private Button backButton;
     private Button increaseButton;
     private Button decreaseButton;
     private TextView numParksVisited;
     private TextView parkNotes;
-    private int visitCount = 0;
     public User currentUser;
     private AppDatabase db;
     private CustomNationalParkInstanceAdapter customNationalParkInstanceAdapter;
@@ -138,46 +131,80 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void parksVisitedIncrementer(View view) {
-        Button increaseButton = findViewById(R.id.increaseButton);
-        TextView numParksVisited = findViewById(R.id.visitCounter);
-        numParksVisited.setText("Number of Visits: " + visitCount);
-
-        increaseButton.setOnClickListener((v) -> {
-            visitCount++;
-            numParksVisited.setText("Number of Visits: " + visitCount);
-        });
-    }
-
-    @SuppressLint("SetTextI18n")
-    public void parksVisitedDecrementer(View view){
-        Button decreaseButton = findViewById(R.id.decreaseButton);
-        TextView numParksVisited = findViewById(R.id.visitCounter);
-        numParksVisited.setText("Number of Visits: " + visitCount);
-
-        decreaseButton.setOnClickListener((v) -> {
-            if (visitCount > 0) {
-                visitCount--;
-            }
-            numParksVisited.setText("Number of Visits: " + visitCount);
-        });
-    }
-
     public void setNationalParkScreen(NationalPark nationalPark, NationalParkInstance nationalParkInstance) {
         setContentView(R.layout.national_park_screen);
+        Button editButton = findViewById(R.id.editParkButton);
+        Button backButton = findViewById(R.id.backButton);
         TextView textView = findViewById(R.id.test);
         textView.setText(nationalPark.getParkName());
+
+        TextView parkNotes = findViewById(R.id.parkNotes);
+        parkNotes.setText(nationalParkInstance.getParkNotes());
 
         TextView parkTextView = findViewById(R.id.parkDescription);
         parkTextView.setText(nationalPark.getParkDescription());
 
+        TextView visitsView = findViewById(R.id.visitCounter);
+        visitsView.setText("Number of Visits: " + nationalParkInstance.getNumOfVisits());
+
+        editButton.setOnClickListener((v) ->
+            setNationalParkScreenEdit(nationalPark, nationalParkInstance)
+        );
+        backButton.setOnClickListener((v) ->
+                switchToMainScreen()
+        );
+    }
+
+
+    public void setNationalParkScreenEdit(NationalPark nationalPark, NationalParkInstance nationalParkInstance) {
+        setContentView(R.layout.edit_national_park_screen);
+        TextView textView = findViewById(R.id.test);
+        textView.setText(nationalPark.getParkName());
+        final int[] visitCount = {nationalParkInstance.getNumOfVisits()};
+
+        TextView parkTextView = findViewById(R.id.parkDescription);
+        parkTextView.setText(nationalPark.getParkDescription());
+
+        Button decreaseButton = findViewById(R.id.decreaseButton);
+        Button increaseButton = findViewById(R.id.increaseButton);
+        TextView numParksVisited = findViewById(R.id.visitCounter);
+        numParksVisited.setText("Number of Visits: " + visitCount[0]);
+
+        decreaseButton.setOnClickListener((v) -> {
+            if (visitCount[0] > 0) {
+                visitCount[0]--;
+                nationalParkInstance.setNumOfVisits(visitCount[0]);
+            }
+            numParksVisited.setText("Number of Visits: " + visitCount[0]);
+        });
+
+        increaseButton.setOnClickListener((v) -> {
+            visitCount[0]++;
+            numParksVisited.setText("Number of Visits: " + visitCount[0]);
+            nationalParkInstance.setNumOfVisits(visitCount[0]);
+        });
+
 //get and set notes
         parkNotes = findViewById(R.id.parkNotes);
-        //parkNotes.setText(db.nationalParkInstanceDao().getNotes(this.currentUser.getUid(), nationalParkInstance.getParkId()));
+
+        new Thread(() -> {
+            parkNotes.setText(db.nationalParkInstanceDao().getNotes(currentUser.getUid(), nationalParkInstance.getParkId()));
+        }).start();
 
 
         backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener((l) -> switchToMainScreen());
+        backButton.setOnClickListener((l) -> setNationalParkScreen(nationalPark, nationalParkInstance));
+
+        saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener((l) -> {
+            new Thread(() -> {
+                NationalParkInstanceDao nationalParkInstanceDao = db.nationalParkInstanceDao();
+                nationalParkInstance.setParkNotes(parkNotes.getText().toString());
+                nationalParkInstanceDao.updateInstance(nationalParkInstance);
+                runOnUiThread( () -> setNationalParkScreen(nationalPark, nationalParkInstance));
+            }).start();
+
+        });
 
     }
 
